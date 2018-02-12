@@ -4,13 +4,14 @@ import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import org.rapidpm.ddi.DI;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 import org.rapidpm.vaadin.addons.framework.Registration;
 import org.rapidpm.vaadin.shared.Customer;
 import org.rapidpm.vaadin.shared.CustomerStatus;
-import org.rapidpm.vaadin.srv.PropertyService;
+import org.rapidpm.vaadin.srv.api.PropertyService;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.util.Set;
 
 import static java.util.concurrent.ConcurrentHashMap.newKeySet;
@@ -52,17 +53,29 @@ public class CustomerForm extends Composite implements HasLogger {
   private final Binder<Customer> beanBinder      = new Binder<>(Customer.class);
   private final Set<UpdateEvent> saveListeners   = newKeySet();
   private final Set<UpdateEvent> deleteListeners = newKeySet();
-  private Customer customer;
+  private       Customer         customer;
 
-  private final PropertyService propertyService = DI.activateDI(PropertyService.class);
+  @Inject private PropertyService propertyService;
 
   public String resolve(String key) {
     return propertyService.resolve(key);
   }
 
+  private final Layout layout = new FormLayout(firstName,
+                                               lastName,
+                                               email,
+                                               status,
+                                               birthday,
+                                               new HorizontalLayout(save, delete)
+  );
 
   public CustomerForm() {
+    setCompositionRoot(layout);
+    setSizeUndefined();
+  }
 
+  @PostConstruct
+  private void postConstruct() {
     firstName.setId(TF_FIRST_NAME_ID);
     firstName.setCaption(resolve(TF_FIRST_NAME_CAPTION));
 
@@ -89,20 +102,10 @@ public class CustomerForm extends Composite implements HasLogger {
     delete.setCaption(resolve(BTN_DELETE_CAPTION));
     delete.addClickListener(e -> this.delete());
 
-    final FormLayout layout = new FormLayout();
-    layout.addComponents(firstName,
-                         lastName,
-                         email,
-                         status,
-                         birthday,
-                         new HorizontalLayout(save, delete)
-    );
-
     beanBinder.bindInstanceFields(this);
 
-    setCompositionRoot(layout);
-    setSizeUndefined();
   }
+
 
   public void setCustomer(Customer customer) {
     this.customer = customer;

@@ -1,4 +1,4 @@
-package org.rapidpm.vaadin.srv;
+package org.rapidpm.vaadin.srv.api;
 
 import org.rapidpm.vaadin.shared.Customer;
 

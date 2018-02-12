@@ -1,27 +1,21 @@
-package org.rapidpm.vaadin.srv;
+package org.rapidpm.vaadin.srv.impl;
 
 import org.rapidpm.dependencies.core.logger.HasLogger;
 import org.rapidpm.vaadin.shared.Customer;
 import org.rapidpm.vaadin.shared.CustomerStatus;
+import org.rapidpm.vaadin.srv.api.CustomerService;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.*;
 
-public class CustomerServiceImpl implements HasLogger, CustomerService {
+public class CustomerServiceImpl implements HasLogger , CustomerService {
 
-  private static CustomerServiceImpl instance;
-  private final  Map<Long, Customer> contacts = new HashMap<>();
+  private final Map<Long, Customer> contacts = new HashMap<>();
 
-  private CustomerServiceImpl() {
-  }
-
-
-  public static CustomerService getInstance() {
-    if (instance == null) {
-      instance = new CustomerServiceImpl();
-      instance.ensureTestData();
-    }
-    return instance;
+  @PostConstruct
+  private void postConstruct() {
+    ensureTestData();
   }
 
   @Override
@@ -106,8 +100,7 @@ public class CustomerServiceImpl implements HasLogger, CustomerService {
 
 
   public void resetData() {
-    instance.contacts.clear();
+    contacts.clear();
     ensureTestData();
   }
-
 }

@@ -158,6 +158,11 @@
       </dependency>
       <dependency>
         <groupId>org.rapidpm</groupId>
+        <artifactId>rapidpm-vaadin-addons-modules-di-ddi</artifactId>
+        <version>${rapidpm-vaadin-addons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.rapidpm</groupId>
         <artifactId>rapidpm-vaadin-addons-modules-testbench</artifactId>
         <version>${rapidpm-vaadin-addons.version}</version>
       </dependency>
@@ -202,6 +207,10 @@
     <dependency>
       <groupId>org.rapidpm</groupId>
       <artifactId>rapidpm-vaadin-addons-modules-framework</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.rapidpm</groupId>
+      <artifactId>rapidpm-vaadin-addons-modules-di-ddi</artifactId>
     </dependency>
     <dependency>
       <groupId>org.rapidpm</groupId>
