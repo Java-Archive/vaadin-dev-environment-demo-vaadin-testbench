@@ -1,5 +1,7 @@
 package org.rapidpm.vaadin.ui.app;
 
+import com.vaadin.annotations.JavaScript;
+import com.vaadin.annotations.Title;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.ValueChangeMode;
@@ -14,9 +16,21 @@ import org.rapidpm.vaadin.srv.CustomerService;
 import org.rapidpm.vaadin.srv.CustomerServiceImpl;
 import org.rapidpm.vaadin.srv.PropertyService;
 import org.rapidpm.vaadin.ui.components.CustomerForm;
+import org.vaadin.leif.headertags.Meta;
+import org.vaadin.leif.headertags.MetaTags;
+import org.vaadin.leif.headertags.Link;
 
 import static org.rapidpm.vaadin.shared.Constants.REGISTRY_BASE_KEY;
 
+@JavaScript("vaadin://app.js")
+@Link(rel = "manifest", href = "./manifest.json")
+@Link(rel = "sw.js", href = "./sw.js")
+@MetaTags({
+              @Meta(name = "viewport", content = "width=device-width, initial-scale=1") ,
+              @Meta(name = "theme-color", content = "#404549") ,
+              @Meta(name = "description", content = "some content") ,
+          })
+@Title("Vaadin PWA Jumpstart")
 public class MyUI extends UI implements HasLogger {
 
   public static final String COMPONENT_BASE_KEY = REGISTRY_BASE_KEY + "." + MyUI.class.getSimpleName();
