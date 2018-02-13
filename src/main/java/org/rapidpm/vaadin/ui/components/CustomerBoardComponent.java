@@ -72,9 +72,9 @@ public class CustomerBoardComponent extends Composite implements HasLogger {
     clearFilterTextBtn.addClickListener(e -> filterText.clear());
 
     addCustomerBtn.setId(NEW_CUSTOMER_BTN_ID);
-//    addCustomerBtn.setCaption(resolve(NEW_CUSTOMER_BTN_CAPTION));
     addCustomerBtn.setCaptionAsHtml(true);
     addCustomerBtn.setCaption(VaadinIcons.USER.getHtml());
+    addCustomerBtn.setDescription(resolve(NEW_CUSTOMER_BTN_CAPTION));
     addCustomerBtn.setIconAlternateText(resolve(NEW_CUSTOMER_BTN_CAPTION));
     addCustomerBtn.addClickListener(e -> {
       grid.asSingleSelect().clear();

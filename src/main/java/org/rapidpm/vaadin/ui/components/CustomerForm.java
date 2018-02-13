@@ -98,29 +98,27 @@ public class CustomerForm extends Composite implements HasLogger {
     birthday.setCaption(resolve(DF_BIRTHDAY_CAPTION));
 
     save.setId(BTN_SAVE_ID);
-//    save.setCaption(resolve(BTN_SAVE_CAPTION));
     save.setCaptionAsHtml(true);
     save.setCaption(VaadinIcons.THUMBS_UP_O.getHtml());
+    save.setDescription(resolve(BTN_SAVE_CAPTION));
     save.setClickShortcut(KeyCode.ENTER);
     save.addClickListener(e -> this.save());
 
     delete.setId(BTN_DELETE_ID);
-//    delete.setCaption(resolve(BTN_DELETE_CAPTION));
     delete.setCaptionAsHtml(true);
     delete.setCaption(VaadinIcons.THUMBS_DOWN_O.getHtml());
+    delete.setDescription(resolve(BTN_DELETE_CAPTION));
     delete.addClickListener(e -> this.delete());
 
     cancel.setId(BTN_CANCEL_ID);
-//    cancel.setCaption(resolve(BTN_CANCEL_CAPTION));
     cancel.setCaptionAsHtml(true);
     cancel.setCaption(VaadinIcons.CLOSE.getHtml());
+    cancel.setDescription(resolve(BTN_CANCEL_CAPTION));
     cancel.addClickListener(e -> {
       this.customer = null;
       setVisible(false);
     });
-
     beanBinder.bindInstanceFields(this);
-
   }
 
 
