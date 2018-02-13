@@ -1,5 +1,6 @@
 package org.rapidpm.vaadin.ui.components;
 
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Sizeable;
 import com.vaadin.shared.ui.ValueChangeMode;
@@ -66,12 +67,15 @@ public class CustomerBoardComponent extends Composite implements HasLogger {
     filterText.setValueChangeMode(ValueChangeMode.LAZY);
 
     clearFilterTextBtn.setId(CLEAR_FILTER_BTN_ID);
-    clearFilterTextBtn.setIcon(FontAwesome.TIMES);
+    clearFilterTextBtn.setIcon(VaadinIcons.CLOSE_BIG);
     clearFilterTextBtn.setDescription(resolve(CLEAR_FILTER_BTN_DESCRIPTION));
     clearFilterTextBtn.addClickListener(e -> filterText.clear());
 
     addCustomerBtn.setId(NEW_CUSTOMER_BTN_ID);
-    addCustomerBtn.setCaption(resolve(NEW_CUSTOMER_BTN_CAPTION));
+//    addCustomerBtn.setCaption(resolve(NEW_CUSTOMER_BTN_CAPTION));
+    addCustomerBtn.setCaptionAsHtml(true);
+    addCustomerBtn.setCaption(VaadinIcons.USER.getHtml());
+    addCustomerBtn.setIconAlternateText(resolve(NEW_CUSTOMER_BTN_CAPTION));
     addCustomerBtn.addClickListener(e -> {
       grid.asSingleSelect().clear();
       customerForm.setCustomer(new Customer());
@@ -79,8 +83,10 @@ public class CustomerBoardComponent extends Composite implements HasLogger {
 
     final Layout filtering = new CssLayout(filterText, clearFilterTextBtn);
     filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
+    ((CssLayout) filtering).setResponsive(true);
     final Layout buttons = new HorizontalLayout(filtering, addCustomerBtn);
     buttons.setHeight(40, Sizeable.Unit.PIXELS);
+    ((HorizontalLayout) buttons).setResponsive(true);
 
     grid.setId(DATA_GRID_ID);
     grid.addColumn(Customer::getFirstName)

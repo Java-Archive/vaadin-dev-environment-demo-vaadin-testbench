@@ -2,6 +2,7 @@ package org.rapidpm.vaadin.ui.components;
 
 import com.vaadin.data.Binder;
 import com.vaadin.event.ShortcutAction.KeyCode;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.rapidpm.dependencies.core.logger.HasLogger;
@@ -40,6 +41,9 @@ public class CustomerForm extends Composite implements HasLogger {
   public static final String BTN_DELETE_ID      = buttonID().apply(CustomerForm.class, "btn_delete");
   public static final String BTN_DELETE_CAPTION = caption().apply(BTN_DELETE_ID);
 
+  public static final String BTN_CANCEL_ID      = buttonID().apply(CustomerForm.class, "btn_cancel");
+  public static final String BTN_CANCEL_CAPTION = caption().apply(BTN_CANCEL_ID);
+
 
   private final TextField                firstName = new TextField();
   private final TextField                lastName  = new TextField();
@@ -48,6 +52,7 @@ public class CustomerForm extends Composite implements HasLogger {
   private final DateField                birthday  = new DateField();
   private final Button                   save      = new Button();
   private final Button                   delete    = new Button();
+  private final Button                   cancel    = new Button();
 
 
   private final Binder<Customer> beanBinder      = new Binder<>(Customer.class);
@@ -66,7 +71,7 @@ public class CustomerForm extends Composite implements HasLogger {
                                                email,
                                                status,
                                                birthday,
-                                               new HorizontalLayout(save, delete)
+                                               new HorizontalLayout(save, delete, cancel)
   );
 
   public CustomerForm() {
@@ -93,14 +98,26 @@ public class CustomerForm extends Composite implements HasLogger {
     birthday.setCaption(resolve(DF_BIRTHDAY_CAPTION));
 
     save.setId(BTN_SAVE_ID);
-    save.setCaption(resolve(BTN_SAVE_CAPTION));
-    save.setStyleName(ValoTheme.BUTTON_PRIMARY);
+//    save.setCaption(resolve(BTN_SAVE_CAPTION));
+    save.setCaptionAsHtml(true);
+    save.setCaption(VaadinIcons.THUMBS_UP_O.getHtml());
     save.setClickShortcut(KeyCode.ENTER);
     save.addClickListener(e -> this.save());
 
     delete.setId(BTN_DELETE_ID);
-    delete.setCaption(resolve(BTN_DELETE_CAPTION));
+//    delete.setCaption(resolve(BTN_DELETE_CAPTION));
+    delete.setCaptionAsHtml(true);
+    delete.setCaption(VaadinIcons.THUMBS_DOWN_O.getHtml());
     delete.addClickListener(e -> this.delete());
+
+    cancel.setId(BTN_CANCEL_ID);
+//    cancel.setCaption(resolve(BTN_CANCEL_CAPTION));
+    cancel.setCaptionAsHtml(true);
+    cancel.setCaption(VaadinIcons.CLOSE.getHtml());
+    cancel.addClickListener(e -> {
+      this.customer = null;
+      setVisible(false);
+    });
 
     beanBinder.bindInstanceFields(this);
 

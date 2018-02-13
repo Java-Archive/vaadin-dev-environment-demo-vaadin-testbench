@@ -14,7 +14,6 @@ import javax.inject.Inject;
 
 @JavaScript("vaadin://app.js")
 @Link(rel = "manifest", href = "./manifest.json")
-@Link(rel = "sw.js", href = "./sw.js")
 @MetaTags({
               @Meta(name = "viewport", content = "width=device-width, initial-scale=1"),
               @Meta(name = "theme-color", content = "#404549"),

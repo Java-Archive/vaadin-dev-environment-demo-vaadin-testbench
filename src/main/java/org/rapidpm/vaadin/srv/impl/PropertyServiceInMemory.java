@@ -57,6 +57,7 @@ public class PropertyServiceInMemory implements PropertyService {
     storage.put("customerform-datefield-df_birthday.caption", "Birthday");
     storage.put("customerform-button-btn_save.caption", "Save");
     storage.put("customerform-button-btn_delete.caption", "Delete");
+    storage.put("customerform-button-btn_cancel.caption", "Cancel");
 
   }
 }
